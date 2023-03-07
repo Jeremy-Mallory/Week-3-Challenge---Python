@@ -65,6 +65,7 @@ print(f"Average Change:  ${average_P_L}")
 print(f"Greatest Increase in Profits:  {greatest_profit} (${greatest_increase})")
 print(f"Greatest Decrease in Losses:  {greatest_loss} (${greatest_decrease})")
 
+#Write output to text file and place in directory pybank->output
 budget_analysis = os.path.join("PyBank", "Output", "budget_data.txt")
 with open(budget_analysis, "w") as outfile:
 
