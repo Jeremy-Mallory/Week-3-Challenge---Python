@@ -3,11 +3,10 @@ import os
 import collections
 from collections import Counter
 
-#Create lists for each column 
-ballotid = []
-county = []
+#Create lists for output variables
 candidates = []
 votes_for_candidate = []
+
 #Define path for csv file to be read
 election_path = os.path.join("PyPoll", "Resources", "election_data.csv")
 
@@ -24,16 +23,19 @@ with open(election_path, 'r') as csvfile:
     #Use sorted function to sort list of candidates by alphabetical order
     candidates_sorted = sorted(candidates)
 
-    #Use counter function to count votes for each candidate
+    #Use counter function to create dictionary containing name of candidate(key) & votes received (value)
     count_candidate = Counter(candidates_sorted) 
+
+    #Use most_common function to sort candidates by votes received from highest to lowest
     votes_for_candidate.append(count_candidate.most_common())
     
+    #Calculate percentage of total votes for all candidates & format output as % to 3 decimal places
     for item in votes_for_candidate:
         first = format((item[0][1])*100/(sum(count_candidate.values())),'.3f')
         second = format((item[1][1])*100/(sum(count_candidate.values())),'.3f')
         third = format((item[2][1])*100/(sum(count_candidate.values())),'.3f')
       
-    
+    #Write output to terminal
     print("Election Results")
     print("-------------------------")
     print(f"Total Votes:  {sum(count_candidate.values())}")
@@ -45,7 +47,7 @@ with open(election_path, 'r') as csvfile:
     print(f"Winner:  {votes_for_candidate[0][0][0]}")
     print("-------------------------")
     
-    #Write output to text file and place in directory pybank->output
+    #Write output to text file and place in directory PyPoll->output
     election_analysis = os.path.join("PyPoll", "Output", "election_data.txt")
     with open(election_analysis, "w") as outfile:
 
@@ -59,7 +61,7 @@ with open(election_path, 'r') as csvfile:
      outfile.write("-------------------------")
      outfile.write(f"Winner:  {votes_for_candidate[0][0][0]}")
      outfile.write("-------------------------")
-     
+
 
 
 
